@@ -1,0 +1,690 @@
+Let's. Let's start again. Let's start again with the second part of the class.
+0:01
+No dropping in class place. He has a broken arm. Just this job.
+0:07
+Sorry. Yeah, I. Hold it. You are. You're getting better.
+0:11
+Yeah, I did my best bike accident. Well, I stepped it sideways, and it just like it looks like I'm.
+0:16
+You know. Yeah, well, that's then, I guess. Been there.
+0:25
+Done that. Hope you have a quick recovery.
+0:29
+Uh, yeah. Okay. Let's talk about LSTMs.
+0:34
+Okay. So, look, what we talked about earlier was gates or mechanisms to allow certain things to pass and certain things not to pass.
+0:39
+We said that we are having a sigmoid activation function and tangent activation function.
+0:50
+Each of them have two rows. So Sigmoid has one row.
+0:58
+and the tangent has another role. And the first one the sigmoid is basically the role of the gate, because it's between zero and one.
+1:02
+Thus if you have something that is zero or closer to zero information, is not allowed to pass or information is not retained.
+1:10
+If you have something closer to one, then information is retained and then with a tangent function,
+1:18
+basically we want to scale things into the minus one one where you say,
+1:24
+okay, I want to retain this information or I want to forget the information, or retain kind of the negative part of the information.
+1:28
+Okay. So that's where these two activation functions come in play and that's how a LSTM looks like.
+1:35
+Basically, you can imagine with a lot of neurons inside, just think about it as this simpler graph where you take the current input here.
+1:43
+Okay, that's just a second.
+1:55
+Um, okay, so you take the first. So there's the forget gate basically to tell you how much information to remember
+2:04
+or to forget how much information from the previous from the previous iteration.
+2:14
+And you have the cell state which gathers this information that's C up there.
+2:21
+And basically when you come here in this gate, you take the current input,
+2:25
+you take the previous given state and you take the cell state and you say, okay, what proportion do we want to keep right with this signal?
+2:32
+sigmoid acivation basically,do we want to keep more information or Do we want to keep less information from the previous timestep?
+2:43
+And basically, if you have something which is closer to zero, just imagine it's just one number, not matrices, just one number.
+2:50
+If it's something that just goes up to zero when multiplied with the previous or the past information, the remembered information or the memory.
+2:59
+The C represents kind of the long term memory.
+3:08
+Then when you multiply this zero or one or something that's closer to zero or closer one, then basically you indicate how much information you want.
+3:12
+to retain. Closer to zero is no information.
+3:21
+Closer to one is more like the whole information. Okay, so in this way, again, all these blue and green boxes, they are learnable parameters,
+3:25
+which means that through the training of the network, it will learn what to remember or what to forget.
+3:35
+Okay. All right. So in the first. The first gate, the forget gate.
+3:41
+Okay. You actually have this operation which will tell you how much to remember, how much to forget based on the input and the previous hidden state.
+3:45
+And it will give you this kind of cell state, which is this, let's say, the memory of the method,
+3:54
+then in the the second in the second gate over there, that's the input gate.
+4:01
+Basically what happens is that you say, okay, how much of the input I want to to or how much input needs to impact the memory and basically say,
+4:09
+first of all, scale my input between zero and minus one and one.
+4:23
+Okay, so that we have normalised inputs.
+4:28
+And again, this is based on this two parameters on the current input and the previous output of the previous hidden state.
+4:31
+So scale them between minus one and one in the sense of, okay, let's see how much do we want to keep?
+4:41
+How much we what do we want to do to to keep the same information?
+4:48
+Or do we want to to take the opposite information to forget some things and then basically in the sigmoid and
+4:53
+ we're going to to actually find the proportion of this information that we want to to keep that.
+5:00
+Then you multiply them up there, right?
+5:10
+So you're multiplying this to indicate how much of this new knowledge that you have indicated with the minus one you want to actually keep.
+5:12
+So multiply and some of them so you add them to the to the memory.
+5:20
+Okay. So if you think about this first two what you have is let's see how much memory I want to retain from before.
+5:25
+Let's see how much I want to actually add, how much new information I want to add to the memory.
+5:34
+Right. And then at the end your output is your cell state.
+5:40
+And then you also want to output a new hidden state, which is again about how much information you want to actually impact.
+5:46
+The next decision point it the output the output gate.
+5:58
+Okay. Is this clearer? Like more or less?
+6:09
+No. So through the whole step, you actually think about the C of the state as your memory of the network and you want to say how much?
+6:12
+You want to retain from the input and from the previous and from the previous memory in the first in the forget you actually norm reduce this
+6:26
+memory all because so so you reduce this memory and you say okay I want to retain the whole or part or non at all from this previous memory.
+6:38
+And then in the second, you actually want to say how much of the new inputs that I have.
+6:50
+I want to add to this memory. Okay. Now, this can be it's not necessarily is a proportion that you can reduce with 50% and then you add knowledge 50%.
+6:55
+Right. what matters is that their kind of stuffed together.
+7:04
+Do you actually have something meaningful based on the.
+7:09
+back propagation, or the learning process, and then at the end you want to, to output certain proportion of that information.
+7:14
+Right. All right.
+7:28
+I know it's a bit messy, but I know you can read it.
+7:33
+And actually in the book slide all the.
+7:39
+Of the actually on this slide, there is an explanation about the gates.
+7:46
+Each gate does what? It's not. It's in the notes.
+7:52
+So when you open the slides, you can actually read them more carefully.
+7:56
+But just think about the fact that we want to keep and not keep certain information.
+7:59
+Why do we want to do that? Actually. Because we want to reduce the.
+8:05
+Or mitigate the problem with the vanishing gradient so that we actually keep.
+8:10
+If you remember this first figure here it.
+8:15
+This one. Basically what we want to change is these distributions so that we don't have every time halving the, the, uh,
+8:22
+the previous information but have a different distribution which will give more weight on some previous states.
+8:31
+The previous inputs. Right. And less weight perhaps on the latest one.
+8:41
+Right. So that's the whole idea that we don't have like disproportionate impact of these different inputs, but we have a more balanced distribution.
+8:46
+Any questions? What is C-bar-t there?.
+9:04
+Let's see. Yeah, it's just notation here.
+9:16
+Don't worry about it, because basically it is the scaled, the scaled input, and previous hidden state.
+9:23
+So the combination of the input and the previous hidden state in a scale between minus one and one.
+9:31
+So it's just a notation to, to say, okay, we take this one and then plus this one, and then that's what happens.
+9:38
+But the idea is that you have the scale in between minus one and one.
+9:44
+If you see other other diagrams representing the LSTM units, you may not see the C-bar.
+9:52
+Yeah. Okay. So these are the the formulas.
+9:59
+Yeah. What does what do they say?
+10:09
+Well, no, no, no. So. What is Wf?
+10:15
+I was like this one.
+10:20
+Yes. The hidden the hidden, hidden messages.
+10:29
+And it will live with it. Okay. So W's and U's are trainable parameters, right?
+10:34
+So that's what it says. And what it has to tell you is that you have actually neural networks within the neural network.
+10:43
+Right. All these are different components of different neurones that are linked together.
+10:49
+And so you have trainable parameters for the forget gate and you have for both the the input and the previous hidden state.
+10:55
+You have one also for the input gate, which is the Wi and Ui you have for this C bar and you have for the O and so on and so on.
+11:05
+So all these things are trainable parameters.
+11:15
+So your neural network, your unit of LSTM, your LSTM unit, is actually a combination of different neurones and different subnets.
+11:18
+Let's say that all these they have this kind of trainable parameters,
+11:27
+which means that when you do all these computations backwards, you update all these W's so that the information is learned in these neurones.
+11:31
+Now that's actually the beauty of LSTMs that you don't need a lot.
+11:39
+You need just to define one unit. LSTM or RNN, basically.
+11:46
+And, uh, kind of. That's it. You can use a shallow neural network, a shallow LSTM, to encode language quite nicely.
+11:51
+I mean, it will not be the best model, but still, with one layer or two layers, you can actually do magic.
+12:01
+So. And then that's because you have all this complexity there inside, okay.
+12:09
+The question here is this light is not for you to remember this one.
+12:21
+It's okay. It's not about that. It's about the representing.
+12:24
+Actually, this story here where you have these gates, his gates and these gates and this transformation right. How does this sophisticated assembly.
+12:27
+relate to the previous idea.
+12:39
+It's the system that these two universities. Because we see these two features.
+12:43
+These features. It really is, because it seems that we micromanage the system with all this more towards the toaster, and that goes against the apron.
+12:49
+Who's there? Yeah, over there. Your colleague asks about Heuristics, right?
+13:01
+We need to add heuristics to our networks to make them learn something better, right?
+13:05
+Well, it's not a heuristic,
+13:10
+but it's another way of representing kind of the combinations of the information that goes in the neural network and how this information is combined,
+13:12
+which ideally is more optimal than just having a simple RNN right because of the fact that you have something that is proportional.
+13:20
+to the inputs and the previous information.
+13:28
+So it's a it's a way of yeah, I was smart and I did that.
+13:33
+I don't know why that works, but it works so. And if you look at the next thing, that is the gated recurrent unit which gets calculated.
+13:38
+I think that's from 2013, 2014 actually.
+13:47
+So basically there is no safe state there. So there is no information that is retained.
+13:53
+The long the memory but everything is captured within the hidden state.
+13:58
+And basically you have ah a reset gate and update gate and that's it.
+14:04
+And the reset gate to just kind of tell you again how much information you want to, to, to lose, to forget.
+14:09
+And the update is how you actually update this. Well, the hidden state based on the previous information the x the.
+14:17
+So that's the reset gate here, which is actually against saying what proportion from H and X you want to retain.
+14:29
+Multiply with some stuff there and then you have the update gate here which tells you how much information you want to keep because you scale it again here.
+14:38
+Now here we have an H-bar-t just another notation , the x is just a modification.
+14:47
+its the hartmann product
+14:54
+The point-wise product
+15:02
+Okay. And so at the end, what you have is you.
+15:08
+That was altogether. But the two work in a similar way.
+15:16
+They have similar performances. This one, the GRU it has less parameters, as you can see.
+15:22
+You have one, two, three. State, one, one, two, one, two, three, four.
+15:30
+So this is. This is trainable.
+15:40
+Okay. So. three trainable or six trainable maxes.
+15:46
+The rest are basically mathematical corrections.
+15:53
+Right. Well, the other one, the LSTM, has many more trainable parameters.
+15:58
+So basically, from a complex perspective, GRU is preferable because you have less hyperparameters, sorry less parameters.
+16:05
+not hyperparameters to to deal with.
+16:16
+Um, somehow though, although both of them they show similar performance in language modelling LSTM is the preferred one.
+16:19
+So you can use either of them when you train your own neural machine
+16:28
+translation system if you want. But. They are actually LSTMs are somehow the dominant of the four.
+16:33
+Okay. And so another thing that udesh you mentioned is sorry.
+16:43
+Do you guys have any questions about the gates, the gated units.
+16:49
+The whole point of the GRU and the LSTM is to scale, to decide on how much of the raw information to retain at each step of the output.
+16:54
+How much information from the previous steps to be retained basically.
+17:14
+and you just scale it Depending on
+17:21
+The whole point of this is to avoid the, try to mitigate the problem of vanishing gradients.
+17:26
+Yes. Losing the gradients
+17:32
+You can't do that by. Providing further layers down the line to some proportion of the raw information that provided before into the previous states.
+17:37
+You add new layers that will actually learn how much proportion to keep or to drop.
+17:53
+So that's how much information we're going to keep is the learning parameter. Yes, exactly.
+18:01
+Yeah. So basically, if was it somebody of you or somebody else mentioned that we have actually a limited H, right.
+18:06
+Limited internal storage and we want to squeeze in all the information there.
+18:14
+What we can do is either expand this right. Which we don't want to,
+18:20
+because that's what we want to abstract away and then keep a very small representation of this information
+18:24
+or create a different distribution within this information or the knowledge that we want to get.
+18:31
+Like when you talk about sequences that we want to talk about words or timestamps or I know prices and etc., which depend on a lot of other stuff.
+18:36
+So we want to keep the important or. Increase the distribution over the important ones and reduce distribution over the less important ones.
+18:45
+Okay. All right.
+18:55
+So when you train your when you build your neural networks recurrent neural networks, you don't do them with a simple RNN units.
+18:58
+You usually do them with LSTMs and GRUs in the Jupyter Notebook, which I don't think we'll have the time to actually look into today.
+19:07
+But in the Jupyter notebook, you have actually a comparison of the three things there of the GRU, LSTM and RNNs.
+19:19
+You can see the different accuracies, different performances.
+19:28
+You can actually play with the the length and see how actually the length impacts the performance
+19:30
+because that's what determines what or what impacts the inability of RNNs to perform well.
+19:37
+Okay, so bidirectional RNNs are RNNs that, where is it, actually go both ways, right?
+19:46
+Think about having a sentence that you want to translate.
+20:00
+You have title sentence and you can proceed from the left to right or the right to the left.
+20:02
+Think about languages like Arabic.
+20:07
+Where are they write from the other You know, from from right to left.
+20:11
+And if you start processing it left or right, basically you focus on the stuff on the back of the sentence.
+20:18
+So you actually want to start from the front,
+20:25
+but also think about the fact that we want to catch all the information equally and thus starting from front, starting from the back,
+20:27
+regardless of which language you take will kind of equalise the distribution and will learn.
+20:35
+Also the first, the front part as well as the back part kind of equally well.
+20:41
+And that's the idea of bi directional RNNs that you kind of loop over both sides.
+20:47
+And you learn. Well, better in a sense, how to encode the distribution on both sides.
+20:56
+Okay. Who can tell me now in what situations bi-RNNs or by directional RNNs would not work.
+21:05
+Not to do this. Sorry. Just. I take the microphone.
+21:13
+In all situations. In all situations, the thing that is most of you are not that basic.
+21:28
+Even levels of information. In the.
+21:40
+So I. And motor vehicle theft was in the hands of the police.
+21:48
+So let's say that like it's not like the information from the past, linearly becomes less of it stuff, you know,
+22:07
+maybe using different parts of the past have different levels of relevance and somehow the model or this,
+22:21
+you know, and okay, so for example, we want to open up a few other people who not give me information from the iPhone or who because it's different,
+22:30
+because it is a duplication process.
+22:50
+Yes. You know, so you have situations where you don't have information about essentially developing your business,
+22:53
+institutional client or stock market as well. Yeah.
+23:02
+Yeah. That was the main example where you don't have actually the end of the sequence or the beginning and
+23:06
+you can learn how to do anything with let's say a big RNN if you have all the information within the ecosystem,
+23:14
+basically. So what you do is you can't just go on both sides because you don't have the sequence.
+23:22
+What about language sentences?
+23:29
+You can also input them and go from left to right, then right  to left.
+23:33
+But when you talk about. Real time speech or simultaneous translation, and then you have to go for that.
+23:38
+So that was that was one example. Anybody has another example.
+23:49
+any type of forecasting, but also video annotation.
+24:06
+let's call in mind that video, if you are going to, how do call it professionally? video captioning
+24:13
+Yeah, Caption. You can't do it because you only have access to the past and the present
+24:21
+But I think this is really interesting and ties into computational linguistics. like garden path sentences.
+24:30
+So is so so this is like the boy knew the answer was at the end of the book, in which if you process it
+24:38
+from left to right and making sense of all the parts of speech, let's say the goal is parts of speech.
+24:49
+What does the point of what's the object of the verb?
+24:54
+You need to get to the end of the sentence and in the context of the neural network that starts from the left and goes to the right.
+24:59
+I see how it being bidirectional increases efficiency since you don't have to get to the end.
+25:10
+the answer was at the end of the book. you don't have to go all the way through.
+25:18
+And then change the whole  representation.
+25:23
+You can go both ways, yeah exactly that's the point of bidirectional RNNs so that you can actually kind of encode long,
+25:27
+long distance relations in a long distance relations in a sequence.
+25:39
+Right. Okay. So that's with the bi-RNNs.
+25:44
+Now let's talk a bit about language processing, what one hot encoding or embeddings.
+25:51
+We talked about one hot encodings. When we first talked about CNNs.
+25:58
+Right. And there we had this  IMDB data set with reviews and where we wanted to do one hot encoding right.
+26:03
+Now there I actually started explaining about one hot encoding and then we ended up in a different route from what it was in the notebook.
+26:11
+Because usually when we do language what we have is.
+26:20
+Sorry just let me. So what we have there is vocabularies of words.
+26:26
+All right. But what we give as inputs to the neural network is numbers, matrices, arrays of inputs of numbers.
+26:34
+Now, what we have usually is like an array, which is syntax, like zero one, two, three until 150,000 another or what.
+26:42
+Right. So, so we have usually around hundreds of thousands of words that are in your dictionary.
+26:52
+Or even if it is 10,000. Right. And then you can imagine that if you give as input, the sequence 012.
+26:59
+And this goes through the network without being or without it being normalised.
+27:07
+Then you you're going to have a very small impact versus if you give something that is 10000, 10001, 10002.
+27:12
+Right. Which has much higher impact because you multiply things.
+27:20
+and then you sum together.
+27:24
+If you have zero one and two, if you multiply them with X, you have zero x plus 0x2 plus 1x2 plus 2x3, which will be one number.
+27:28
+And if you have 10,000, 10,001, 10,002, it will be another number which is much more much bigger than the original,
+27:43
+or the first one.
+27:53
+Yes. No, that in the case of like a random number or it's not normalised let's say because randomness can come in different ways,
+27:58
+but it's a random number, which is between zero and then some other big number. Okay.
+28:06
+Yes, exactly. They have different magnitudes and thus the impact on the network in this then the learning will be different.
+28:11
+So what we do is we want to normalise distance.
+28:17
+So basically we want to put them in a equal distance vectors so that the network will learn this as starting from the same point.
+28:19
+Right. So there is no difference in the way that words are represented by.
+28:30
+So here we have Rome, Paris, Italy, France.
+28:35
+And as you can see here, what we do is for every entry in the vocabulary,
+28:39
+we create an array with the length of this array, this, this being the length of the vocabulary.
+28:44
+If we have 10 words, it will be 10, if we have 15 words, it will be 15
+28:52
+If you have 10,000 it will be 10,000 where we have zeros everywhere except for the index, which corresponds to the index of this word in the picture.
+28:56
+So if we have the zeroth first word Rome, then you have one in this array on the index zero and everything else is zero.
+29:05
+Right. If we have Paris here, we have 0 for the zeroth element one for the first element which corresponds to that.
+29:20
+So the idea is that each of this kind of represents one word.
+29:28
+Then you say is this word this word? So zero, the zeroth element is for Rome, the second element or the first one is for Paris, the third one is for Italy, France and so on.
+29:33
+And then this one is well, this is France.
+29:44
+All right. Now, these are the inputs that we can actually give to the network.
+29:47
+So these are arrays. And each arrays has, again, the size, the length being the length of vocabulary.
+29:52
+So, again, one sentence of four words
+30:00
+Mm hmm. there will be four ones in this area?
+30:04
+No, If you have one sentence of four words and this four words come from a vocabulary which has five words,
+30:09
+then this sentence will be represented with four by five matrix.
+30:16
+So it was like mini or something. Yeah.
+30:22
+Um, so and that does a first thing.
+30:26
+Right. But what happens is that if you have 100,000 words in your vocabulary, basically you're going to have.
+30:30
+An array that has a length of 100 for every 100,000 for every word that is in this vocabulary, which means that they're super big and super scarce,
+30:39
+sparse, because you actually don't have a lot of information there except for one one somewhere and all the rest is zero.
+30:49
+So that's why you can learn different representations using what's called word embeddings.
+30:56
+So basically, if we pass all this one hot encoding things, or even if they are not hot encoded, they're just randomly encoded.
+31:02
+If you pass through a neural network and you try to learn these representations you can come up with.
+31:10
+Much more. Much more condense.
+31:17
+Writers that represent these words and that you don't have only ones and zeros everywhere.
+31:21
+You have. Arbitrary number of arbitrary numbers, which actually are indicative for every different word.
+31:28
+And not only that usually words that that when you when you do word embeddings, it's usually words that are actually closer together in meaning.
+31:36
+They're also marked in the vectors or in into presentations that then also with a small distance cosine similarity,
+31:46
+for example, or Manhattan distance or whatever you want to interpret it.
+31:53
+And the most famous example. Yeah, so that's the, the comparison between the two.
+31:58
+So these are one hot encoding, one hot encodings here where you have like zeros being black fields and the one is represented with a white there.
+32:04
+And then you have the word embeddings which are dense, which are lower dimensional.
+32:16
+And are learned from your data because they can be so that there's a thing that
+32:20
+you can actually learn embeddings from your data or you can use some embeddings that are learned from other data.
+32:29
+Uh. I want to skip this one and I want to go word2vec, and then I'll go back to that one.
+32:36
+So basically, have you heard of word2vec, who has heard of word2vec can i see hands.
+32:44
+But it was. Okay. Then who would like to tell me about word2vec?
+32:53
+Anyone is. Yeah, exactly.
+33:10
+That's what anyone wants to I mean, when you have quote unquote.
+33:19
+Yes. So as far as I remember, there was a target word and how all of the previous words from the sentence are related to the target word and it's like.
+33:34
+Then you can check how big of a relatinship there is between
+33:51
+two words. So basically, if you see the source text there you start from the word the and then you have the sliding window list, you know, it's.
+33:57
+Which basically is five. And then substitute one, one, one.
+34:13
+Then you go through to the right and the left and you try to this and what exactly is what would you like to have to learn?
+34:17
+So you a lot of connections and that is what they thought.
+34:30
+You can say, okay, I went to the train line.
+34:38
+Let me look the size 64 instead of 10,000 and.
+34:42
+And your word representations will be that much. 64.
+34:51
+That's it. And this 64 should ideally capture all the information about all the.
+34:56
+words in your vocabulary. What other word embedding?
+35:00
+models have you heard of? GLOVE
+35:05
+I'll give you a hint. Sesame Street. BERT, Yeah.
+35:14
+Another thing ,RoBERTA.
+35:18
+Anyone? Have you heard of Elmo? Yes. Yes, you do?
+35:24
+Yeah. Uh, yeah. Well, Bert ,Bard all this language models that are trained in a similar way, like, for.
+35:29
+For BERT you have, like, the sentence and some of, like, I think 15% or 25% i don't remember exactly of the proportion of this
+35:39
+Of the words in this sentence are masked. And the task is actually to predict these masked words.
+35:47
+So what happens is that you learn these representations of the other words
+35:52
+that are in your sentence that you can use then to do whatever else you want.
+35:55
+And because they're trained on massive amounts of data, you actually can use them for massive amounts of tasks.
+36:00
+Right now, do you have any questions?
+36:06
+And before we wrap up, I just will go over. That's not just different types of tasks that you can do, one to many, many to one where you have either.
+36:09
+A sequence of things like. Many to
+36:25
+One you basically have a sequence of elements as input, and you want to do some sort of a classification, for example.
+36:30
+Right. Or you even want to when you're given something, let's say.
+36:37
+An image that you don't decode or just a seed, and then you want to generate some sequence out of the seed.
+36:44
+Okay. If you want to generate the 15th sentence in some book, you give the number 15, for example, and then you generate ideally this sentence.
+36:52
+And the most interesting one, of course, is where you have the sequence to sequence model,
+37:03
+which will input things and it will create actually another hidden representation here,
+37:09
+which is O, which is just one entity which represents or captures the information of the whole sentence or the whole sequence.
+37:17
+And then this is given into one too many decoder to actually generate the outputs of the sentence or the output sequence.
+37:24
+And that's the the idea of neural machine translation.
+37:31
+When it started, before the Transformers, we had like the sequence of things that are encoded when you have a hidden representation of this sentence,
+37:34
+which is this multi dimensional hidden state here, and then basically you generate the output.
+37:44
+Okay. And the last thing you'll excuse me for two more minutes is attention.
+37:54
+Okay. Next week, you're going to talk with Sebastian about transformer
+38:01
+Annotation, treansformer based notation.
+38:05
+But I just want to mention it briefly, it's not in the context of CNS, but basically when you have something like this.
+38:08
+What happens is that whether you have an LSTM, a GRU a bidirectional LSTM or bidirectional GRU or whatever it is you have.
+38:20
+A certain compression and loss of information.
+38:29
+The loss of information comes from the fact that you actually just take one single entity that should ideally represent your whole
+38:33
+sentence or whole sequence that you have input and conditionally on that you'd want to generate your outputs equals output sentence,
+38:40
+which means that, okay, I'm going to generate something based on something that I have seen,
+38:49
+like one, one whole representation which may not be complete or enough to represent a meaningful sentence.
+38:53
+meaningful output, so what we can do actually, is to try to align things like this hidden state here.
+39:01
+To try to align with this one here and this one with this one.
+39:10
+This one with perhaps this one. I think if it is French versus the English language where things have changed around, right?
+39:14
+So, the attention mechanism will take when when subgenerating thing or during the training step, it will take this cluster.
+39:22
+There is another layer here which will actually be, let's say, just a matrix that will compute.
+39:30
+What is the proportion or the distribution of of over these
+39:37
+hidden states here, when given this hidden state here.
+39:43
+So it will try to map or align this one here with one of the other ones and then what will happen is then you go to the second one and do the same and third one
+39:47
+you're going to do the same, so you're going to build this matrix of n by m hidden states which will actually map like the one to the other basically or it it's,
+40:00
+it's actually not a 1 to 1 mapping but it's like a more flexible and how to say.
+40:13
+Not too deterministic mapping. So that's what attention does.
+40:22
+Why do we need attention? Because similar to the idea of LSTMs,
+40:26
+we want to pay attention or to actually focus on certain parts of your sentence or your sequence that are more important.
+40:30
+And when you learn these things here, this attention mechanism that counts is a layer inbetween these parts.
+40:37
+You basically you learn which are the more important parts.
+40:43
+Okay. Now, I'll kind of wrap up here.
+40:48
+I started talking about this project with eBay, and there was a reason because actually at this project with eBay,
+40:53
+what we did to analyse our data is to actually look at the attention because as i said if we try to align products.
+40:59
+And what was interesting to see is that when you talk about cameras, for example,
+41:06
+it focussed really on the on the brand of the camera rather than on the other things because it wants to know whether it is its ideal,
+41:10
+whether it is something for samsung or for canon
+41:19
+Right. Because at the end of the day, you can have a case for for your samsung phone or a case for your iPhone.
+41:22
+But what makes the difference is these brands that have that right and so the attention really focussed on all these brand names in our data.
+41:33
+So that was actually very interesting.
+41:41
+But yeah, attention is an intermediate step where you learn intermediate kind of alignment between exits of the hidden states,
+41:44
+between the one from encoder to decoder which are used then later in your for reference to actually focus on specific parts of your sentences.
+41:52
+So I'll finish here. You have to talk about last week about the attention and the CNNs and the multimodal systems.
+42:01
+And next week, you're going to hear more from sebastian on transformer, which is solely based on attention,
+42:10
+some feed forward networks and some other tricks there that makes it so that everybody's using the.
+42:17
+Right. Any questions? Yes. Yes, I'm asking.
+42:28
+Okay. All right. Let's finish here.
+42:33

@@ -1,0 +1,756 @@
+And. Okay.
+0:01
+So welcome and sorry for the scheduling, and I'm happy that you're all here.
+0:09
+Well, most of you. What do you think about the class that we saw last week?
+0:14
+The invited the lecture. How did you find it? Interesting?
+0:20
+He seems like a professional guy. He seems like he knows what he is talking about.
+0:25
+He's actually one of the first people that worked on this multimodal system and developed a double attentive, doubly attentive model,
+0:32
+which then was implemented for eBay to actually identify or translate product descriptions as he was speaking.
+0:41
+I was working actually on the second project with eBay after after him, where we had to align how to say catalogues.
+0:52
+So when you have like catalogue in English and catalog in German and they talk about the same product.
+1:02
+Samsung Galaxy S 23.
+1:08
+Yeah, in both cases, when you actually want to merge these catalogues together and have only one item.
+1:12
+So we was on that and it was quite, quite interesting.
+1:20
+And then we used actually for the second we didn't use Multimodal, which we used text entailment, text entailment a model for text entailment
+1:24
+I'll talk about this later. Let's try saving it now.
+1:37
+What? From the lecture that you saw last time from the invited speak
+1:42
+What you didn't understand. You didn't know anyone.
+1:49
+Yeah. You can go ahead and then I ask somebody else.
+1:55
+The statistical i was very curious about the alternatives to end to end systems.
+2:04
+She talked a little about statistical models or someone, someone's situation in which you have a statistical method for this or this or this or this.
+2:10
+And you put six statistical models together and you get the big system.
+2:19
+And that was what has been done previously to translation models previous to deep learning.
+2:24
+Yeah. Those features of the but they this.
+2:32
+I am not going to go into details there
+2:37
+because I also don't know is it this but before neural networks actually also with neural
+2:46
+networks and before that all this all these systems that we're developing for machine translation,
+2:54
+for example, or for text entailment or for image and text processing like multimodal,
+3:00
+they all are based on simple statistics where you derive some probabilities based on the distribution over the words or over the vocabulary of words.
+3:08
+And then you build one thing that does, let's say, the language modelling a model for modelling language,
+3:17
+which is based on statistical statistical models with find,
+3:24
+for example, another model which is completely different for something else, and then you combine them together.
+3:27
+and you build a cascade model, so that's how it was before.
+3:32
+And when we did a statistical machine station,
+3:35
+basically we would have like an alignment matrix a language model,i don't know, something for correcting error.
+3:39
+and some for this and some for that and then all of this will be glued together.
+3:49
+So that's how it was before. But people spent a lot of time engineering things.
+3:54
+Now it's more on let's throw everything at the neural net, right?
+3:58
+It's the last lecture exam, you know, because I know I was like, woo!
+4:04
+But yeah, well, it's not that the lecture.
+4:13
+I'm not going to. We're not going to take some questions from the lecture and give them on the exam.
+4:19
+But it covers two basic things that will be on the exam.
+4:24
+CNNs and RNNs, right? And CNNs we already saw basically we spent quite some time looking to CNNs.
+4:28
+And from today onwards, we're going to talk about RNNs and transformers.
+4:36
+So RNNs will be today. attention will be covered today at the end, hopefully.
+4:42
+And then we will go to that transformer for next time.
+4:48
+Okay. So how are the previous methods previous to deep learning called?
+4:52
+What was the field, they are part of, statistics?
+4:58
+Well, usually you have like NLP, right?
+5:03
+The natural language processing techniques, models, whatever the previous technology for machine translation was called statistical machine translation.
+5:05
+More specifically, it was referred to as phrase based statistical machine translation because you don't translate per word
+5:15
+but you translate usually per phrases and these phrases can be like one gram being one word,
+5:22
+two grams being two words in a sequence, three, four grams.
+5:28
+So four, four to six was number six was the maximum because then you kind of have to build quite extensive systems.
+5:32
+It's something very interesting actually, if spent one more minute on that, like when we talk about statistical machines translation systems there,
+5:42
+what we do is we capture phrases and then we try to cover ,so the model to cover phrases like one word,
+5:50
+two words that are in a sequence, three words and so on. When we go to neural stuff, we actually break words into smaller chunks.
+5:58
+So it's kind of the opposite thing that we do there. And the idea is that we actually reduce the vocabulary so that we have less to
+6:08
+model but still retain the complexity of language by chunking words into subwords.
+6:15
+And for example, the example that they usually give is when you have something like lower and tallest.
+6:22
+If you split this into low and E-R and tall and E-S-T, then basically you can make combinations.
+6:28
+of this, thus you cover low, lower, lowest. tall, taller, tallest
+6:36
+ with one, two, three, four, four basic subword units and you cover six words anyway.
+6:40
+And these are things that at some point you hopefully will get to learn.
+6:50
+Or if you don't, probably you don't need them.
+6:54
+So now coming back from the last lecture from the invited talk of yasin there, he talked about CNNs and RNNs and how they combine together.
+6:56
+And as I said, my hope is that CNNs are super very clear that everything is.
+7:10
+Yes, yes. Okay. And today we're going to talk about RNNs.
+7:16
+And it's some of, you know, prolog and like prolog.
+7:20
+Well, some of you know prolog and don't like prologue.
+7:28
+Some of you don't know prolog. But the idea is that it probably uses this idea of recursion here.
+7:31
+Also talk about recursion. Now there are two types of of.
+7:39
+looping Networks, The ones are called recursive the others are called recurrent.
+7:46
+In the recursive everything is connected with everything, like backwards and forwards.
+7:52
+So we're not going to cover this. But the recurrent ones basically is what we're going to do.
+7:57
+So as i said or maybe also.
+8:03
+Yasin mentioned, the main, the main idea is language modelling.
+8:06
+because you have sequentiality there and that's why we want to model the sequences with
+8:11
+with networks that actually capture this sequentiality somehow that for example.
+8:17
+You don't need to build a [inaudible] network without knowing how many inputs it would have.
+8:23
+Like you can have two or three words in a sentence or you can have 50 words in a sentence or you can have 1500 words in the sentence or in the paragraph.
+8:30
+Right? So basically.
+8:39
+Through a process of looping over different tokens, different words in a sentence, you can actually capture the whole information.
+8:41
+And that's the idea behind the recurrent neural networks.
+8:48
+Now, as you can see here, there are some examples.
+8:54
+The first one was machine translation, Google Translate, which probably everybody has used here.
+8:57
+That is an image captioning system as an example where you give an image as an input and you get text as output,
+9:04
+kind of similar to what yasin was talking about last time, but without the second net.
+9:13
+This is just one one encoder of for the image and the decoder for the text.
+9:19
+Um, and then here is what a sequence is.
+9:29
+Basically just one element or one token after another, after another after another,
+9:35
+without actually knowing the the size or the length of the sequence beforehand.
+9:42
+Okay. So that's the interesting important thing that leads actually to,
+9:49
+to creating recurrent neural networks because you don't know how many tokens you're going to have as input.
+9:54
+So you need something to loop until the end basically. And this until the end is quite dynamic.
+10:02
+And without further ado, let's go to recurrent neural networks, which if you think about it, it's something very simple.
+10:12
+You have one neuron. Or a bigger network.
+10:19
+doesn't matter, just think about about this one neurone that has its outputs being fed back as input.
+10:23
+Okay. prolog right. Just take the output and give as input, so here in the second in the second image and the figures down there,
+10:32
+what you see is that you have an input x which is sent to some neutral unit, doesn't matter how complex it is.
+10:44
+And then you have the output, which is H and this output can be propagated further and you can do other stuff with the result.
+10:52
+But it is also fed back to the to the neural to the unit as well.
+11:01
+What does that do? Anybody, what would you think is the benefit of this?
+11:06
+Sorry. Anybody else? Why would we want to to have our output being fed as input to the network over there?
+11:14
+Guys. Yeah. Anyone on that side of the room is difficult to pinpoint, but I thought anything could happen.
+11:31
+Why would you think that? We'll need to use the.
+11:46
+Okay? Yeah. You're not doing anything.
+11:58
+So. If you look at the way not to talk about sentences, but about stuff in general, right?
+12:03
+It's not. Do you promise what you have to write?
+12:10
+Right. So you basically, in this instance, anybody else actually has any other idea.
+12:14
+Really decodes the knowledge of the past.
+12:25
+Yes, exactly. It basically captures information that has been passed in the past, past,
+12:29
+in the past and uses it to alter somehow or to to, well to have an impact on whatever happens inside.
+12:36
+Right. So you had indeed a sentence.
+12:47
+When you have like one with another with another, you basically don't lose information for the previous word or the previous words.
+12:49
+Right. And that's why you actually have. Well, this kind of loop.
+12:57
+Does you want to retain this information? And then if you translate it into sentences and language, that's what you want.
+13:02
+You you want the stuff from I and then you add go and then you add to and then school.
+13:09
+And so you get to the whole information of the sentence in one unit, right?
+13:15
+If you want to do this with a, with a feed forward network, you have to have input for eye, for goal for two and for school.
+13:21
+And if you want to actually encode some novel, basically you need for every sentence, for every token an input.
+13:30
+But okay, so far so good.
+13:38
+And basically what's, what needs to be said here is.
+13:42
+That. If you think about it as a function, what you have in the first version here in the forward network,
+13:49
+you have the output being equal to some function over the inputs and the parameters so that all of the when it comes to the recurrent neural network,
+13:58
+you have the output at timestep t being equal to whatever transformation this function applies actually at timestep t minus one.
+14:10
+So the previous timestep together with the current input, the timestep t and the parameters.
+14:20
+Okay. If you think about it in sentences, this means that you take the previous word sorry the information that comes from the previous words,
+14:28
+the current world and whatever is in the network, the parameters, the weights, and then you produce basically the current output.
+14:37
+Is it clear? Yes. So.
+14:50
+If the next prediction is based on the previous prediction.
+14:57
+The errors accumulate. So we start off with one sentence.
+15:07
+That one word, the cat makes sense.
+15:12
+Then there is a matter of the cat called grass.
+15:15
+You're going in a very interesting direction, which I'm going to talk about in a moment.
+15:23
+But yes or no. So just hold that thought and then we're going to go back to it.
+15:28
+Okay. So just to give in here then the formulation.
+15:36
+So basically you have two different weights. Weights that that apply to all that.
+15:41
+So basically here, if this is the connection that you have weights on, this is defined as u.
+15:46
+So you have one matrix of weights and then you have another matrix of weights for for you for this loop.
+15:54
+And then you have, of course, some bias So that's how we define the net.
+16:02
+So basically it's pretty much the same as before, but just you need extra weights for taking care of the the loop.
+16:07
+Okay. And the first input is this.
+16:16
+Now just. Well.
+16:21
+No, because the idea is that the neural network is going to be trained.
+16:34
+So this recurrence is going to to be learned how to be optimal.
+16:38
+So we don't need to do anything. I mean, there are other things to talk about later.
+16:45
+Let's try to optimise the RNN architectures.
+16:50
+But you don't need to put any heuristics.
+16:54
+You can try to do that because at the end of the day, why not?
+16:58
+Right. But in general we don't need it, so the that's the general kind of scheme of the RNN.
+17:01
+But what happens actually is that you when you when you think about it in a sequential way and when you want to actually compute the loss and so on,
+17:13
+it's better to see it as an unfolded version.
+17:25
+Okay. So let's say that we start here at x-1 and we end at x-t right, thats the end of our sentences and basically we have a network which is just start from zero.
+17:29
+And then you have the first input, the second input, the third input.
+17:40
+and so on and so on. So you can see this is a feed-forward network where you just have a lot of inputs which are from one to t.
+17:43
+Right. And that's it. So you can just see or think about this as a unfolded.
+17:52
+Sorry, you can think about the unfolded version as a feed-forward network.
+17:58
+And basically, what would you do? Is it going to have parameters for all of these connections here?
+18:02
+But these parameters are going to be shared. So you're going to have the same parameters similar similar to CNNs, right?
+18:10
+Where we have the same the same fundamentals because you have the kernel going over every everything.
+18:15
+So here basically you have this X connect to the networks other x.
+18:21
+And these are the same collections basically. Right. So that's the way it works.
+18:25
+One, it's true. Yes.
+18:31
+They are the same because they're trained the same. Right. They'll see the training time you update them and they have to become the same
+18:36
+because it's actually the same connection when you just put new new inputs.
+18:44
+And these boxes, you know, this Xs are the inputs that we give to the network.
+18:51
+Let's say sentences so a sentence its words here.
+18:58
+Or this can be some observations for the pains that you have in a month, for example, or some stock values and etc.
+19:02
+So the x'ses are the information that you input, the H is what you have as previous inputs previous outputs.
+19:13
+So but it's still going to use. They give me an excellent look once.
+19:23
+It's like you always take x1,x2,x3 actually goes like this.
+19:30
+Is that true? Yeah. So it's like in this direction here.
+19:35
+X one. So goes to the network then whatever output that is.
+19:39
+You feed the next one and then the next one.
+19:45
+And the next one and the next. Okay. So let's say you have.
+19:49
+Sentence. That's so that's full forward. Mm hmm.
+19:54
+So the one drinks or. There are only doing so for the input.
+19:57
+There's only one way. Yes.
+20:04
+No. And then for each age.
+20:08
+Yes. Because it's different. It's a different. It's a different way.
+20:13
+Yes. So if you do it. Yes.
+20:18
+There are going to be two weights. The one that takes care of the previous outputs and another one that takes care of things.
+20:21
+But these inputs, again, as you say, if you have, let's say, a sentence of four words, you're going to feed the first word.
+20:29
+You're going to take some information out of this.
+20:36
+You're going to have some weights in this connection.
+20:40
+You're going to feed this output back into the network.
+20:43
+You're going to take the second word again. I have the same weights, right?
+20:46
+And so on and so on and so on. Okay.
+20:51
+So you're still going to keep the same with the same weights until you get the information out of again.
+20:54
+And then you do the back propagation and you learn the weights. And again, they're going to be the same.
+21:01
+They will be adapted, but they're going to be the same for the next sentence, which may have five or ten words, right.
+21:06
+Is this clear? So here is a more developed example.
+21:14
+So you actually have this H here, which is that's the output.
+21:23
+But we can also add another weight matrix before that to actually decide the actual output right.
+21:30
+We use this H to  to to actually have it as a feed back into the network.
+21:39
+But we can also use it as sort of some transformation to actually get the real output and basically when you unfold the network,
+21:44
+you're going to get a schema like this where you have one set of weights here.
+21:53
+Another set of weights here and another set of weights here. And then these are, again, W W W,
+22:00
+the U's here are the same and the V's are also the same you're going to get different type of outputs.
+22:06
+And these outputs, they can be the same. Just imagine that you have the unity matrix here.
+22:11
+They can be the same as the the H, but they can also be different if you put some sort of transformation.
+22:16
+So the idea here is to show that with this approach, we actually have flexibility to do extra stuff, to do more than than just take some outputs.
+22:23
+And that's it right. Okay.
+22:33
+And now how do we do we learn these neural networks. Basically, what we are going to have is, let's say you have the X or the input,
+22:39
+you have the matrix U here, which is the weights for the input you have the the the neurone here,
+22:46
+the heat, the unit sorry, the unit with some h which H is set back with a matrix W, which is the weights, and then you have some output.
+22:53
+Again, we have some transformation for that,
+23:04
+this output can be h again or can be oh whatever based on what's here and then based on this output and then the expected output,
+23:05
+you can compute the loss, right? So you can compute the loss for every token, for every output compared to every output.
+23:16
+Sorry every expected output and you compute the loss for every step.
+23:27
+Right. And then what you do is.
+23:31
+Yeah. So you have the loss for every, for every step.
+23:36
+So L1, L2, L3 until Lt and that's based on the output compared to the expected output.
+23:40
+And basically you sum these losses together to get the overall loss.
+23:51
+Okay. So for every input, you get an output, you compare its output with the expected output for every step.
+23:56
+Sorry. And then you sum all these losses together.
+24:02
+And basically this, if you think about it,
+24:06
+it's just another mathematical formula that you can compute the derivative of and then you can do back propagation.
+24:08
+All right. So the the algorithm that does that is called back propagation through time, which is pretty much the same.
+24:14
+What it's the same as back propagation, just it takes into account a loss, which is the sum of different losses.
+24:22
+And because it's a sum of different losses basically if you take into account the derivative with respect to every x.
+24:28
+Right. And then you can optimise the weights according to every input because you have this loss here, which depends on the X'ses.
+24:35
+So if you have. The concept is the dog is black.
+24:46
+Mm hmm. So eight zero is one soldier enslaved on set?
+24:51
+311 predicts the. And then predicts post you you to our house and go, Yes, but you compound the models in the house once.
+24:58
+Then you look at what is it?
+25:12
+Yeah. And then you sum all the losses together, then you compute the derivative of this, the gradient.
+25:17
+And then you basically do back propagation, so back propagation for the time, it's the same as the back propagation.
+25:22
+The only difference is it takes into account a sum of losses and thus when it unfolds, this sum, it goes over every X and every weight here,
+25:30
+and then it updates every weight once, one after another, and at the end, because it's the same matrices.
+25:39
+the same W,U and V basically they will be updated several times with basically the same well, with different, different values.
+25:47
+But at the end, you have only one matrix that optimises the whole loss ideally.
+25:55
+Okay? Yes. I don't.
+26:03
+get the previous architecture in which h was the output.
+26:09
+So here is, you know, what we got.
+26:17
+He didn't speak the age of this state, which is a victory for the.
+26:21
+Mm hmm. The more information. Okay. And then we got.
+26:30
+We got. The main? Yes.
+26:35
+But how does it work? The biggest source of the.
+26:40
+It's. It's all here. It's just taking into account this one.
+26:47
+All right? So it's basically, um, so you take h it goes out and that's what you take out from that,
+26:51
+from the network basically ,but the special thing is that you feed it back in.
+27:00
+They can now say it's the output.
+27:04
+And in the the other case that we saw with the L here you add another neuron another neural network
+27:07
+with another unit that will do something extra on this output to compute the actual output.
+27:12
+Like if you think about it in, in the real, in the original neural network,
+27:17
+you have the, the summation and then you have the activation function, right?
+27:22
+That comes after the sum. So if you think about it, this. If you just take it, you just take out the man as long as you have the basic.
+27:27
+Yes. It's just.
+27:39
+This is it.
+27:43
+No, it is no function of not just the input and the it's it's the wheel is also a function of some other matrix which reads the previous output.
+27:45
+So it's a misnomer. Yeah.
+27:57
+And the thing is that actually it says here you have this Ht,
+28:01
+which is some function over this these matrices here and the previous the previous hidden state of the previous output and the bias.
+28:06
+And that you can consider this as output, but you can also add something extra on top of it.
+28:16
+And then you compute the actual output, which is this O that you saw.
+28:22
+Okay. So that's this or here. If there was no V here, if there was no matrix V basically what you're going to get is
+28:27
+H Right. So if you see this as the unity matrix, so just have some diagonal with one's which would conclude or multiply this by this.
+28:37
+Basically, then you get same thing H. So the actual knowledge about the information about the passes is encoded in W not in H.
+28:49
+But it's. Well, your H is going to.
+29:00
+Well, with neural networks, it's always like encoded in the in the weights, right.
+29:07
+But the way that the weights are computed is based on the hidden or the previous output, in this case the previous state of the network.
+29:12
+So basically you have a multiplication between the weights and whatever comes out of this.
+29:21
+And this thing starts from zero. And it is also related to how the weights are because it will compute over and over again.
+29:25
+And I'm just not sure if you mentioned W with just some scalar value.
+29:36
+Yes. What we're saying is that it's a it's a measure its a number between 0 and 1.
+29:42
+Mm hmm. And we say, okay, each times that we're going to multiply the output by this.
+29:48
+by this number W And in that situation, H is just.
+29:54
+A way of saying how much importance do we want to give the previous timestep?
+30:01
+Yeah. I like how you always go one step, step further before I actually reach there.
+30:07
+But yeah, that's that's new. The point is that it's just really it tells you how like the scales,
+30:12
+the previous negative output based on the you know and also this information here H and makes their combined together in the neuron then you so basically
+30:22
+you have the you have this kind of scaling here if you want to say it like this happens here plus whatever is scaled or transformed here
+30:31
+right this give be an input the test like something like 550 I don't know what other values in a in an input on the right matrix and then
+30:44
+this can be another thing that basically here they're saying this how much information you want for the previous iteration to be the thing.
+30:54
+State's clear. More or less.
+31:05
+So what? You. It's this.
+31:13
+What you need to think about is that basically it's nothing more than just taking the output, feeding it in.
+31:19
+If it sounds a bit more complicated or it looks a bit more complicated because you have a lot of matrices,
+31:26
+to take into account which can multiply with whatever other inputs and so on.
+31:31
+But the whole idea is that you take whatever has been stored in the in the network,
+31:36
+you pass it again as input to the network itself so that you can actually see how much
+31:41
+information you want to keep or retain or how the information from before influences the input.
+31:46
+Okay. And the whole idea is that you actually don't lose or try not to lose information from the
+31:53
+previous inputs so that you can make a decision based on the whole sequence of inputs.
+32:00
+Why do you use the previous output? because it is error prone why don't just use the next input but this scaled output of a network.
+32:09
+As I said again, you're going again one step further in this case, many more steps further.
+32:19
+But yes, you can do that as well. You can take the next you can take the previous input, the the current input.
+32:23
+You can take also in the next input. So you have the bidirectional RNNs,
+32:31
+which actually go through the one side and also through the other side to actually
+32:35
+retain the whole information of a sentence or a time series that you're given.
+32:39
+Okay. So. Okay, so that's the RNN.
+32:46
+And what can you tell me about the vanishing gradient problem?
+32:50
+This can go further and further to remove some of the.
+32:58
+Yes, indeed. And why does that happen? Why do you lose information?
+33:05
+With. I do want to try to give you the try.
+33:20
+No. Okay.
+33:37
+You. Why would you have a problem.
+33:47
+Happens because it when you look back in the.
+33:51
+Lots of them. It's. Yeah.
+34:01
+That's the lost opportunity for each of the next.
+34:08
+You just may have to do.
+34:12
+We?
+34:18
+And you also played this with some sort of look like you can do this with another if you do want to do something and all this information gets more,
+34:20
+it's more important. And then you have an update on the weights, which is a small frame, and then you have more and more small values that given back.
+34:31
+And at the end, what what happens is that you don't update the the first layer.
+34:46
+So in a neural network and in the case of a recurrent neural network, you don't update actually or you lose information about the initial inputs.
+34:53
+And as you can imagine the longer your sequences or your sentence or the time sequence,
+35:04
+the the more you lose information about the first the initial steps in the sequence or the initial words of the sequence.
+35:09
+And here is another illustration that I want to show you.
+35:19
+It's from another video that it's raw video that I watched it from The Deep Learning Course by Andrew ng.
+35:22
+And so if you if you think about it at the first step,
+35:33
+you have all the information about the first word of the sentence "I" or "the cat" or "the" right when you get to the next step,
+35:36
+you have the first one and the second one and they combine together thus
+35:47
+You still have one entity which has all the information for the first and the second,
+35:51
+and then you go to the next one and the next one and the next one.
+35:58
+And here at the end to see that the information about the first word has been reduced so much that you actually when you go back,
+36:00
+you have almost no impact because at the end you have a sum over the losses and these losses depend on all these things, right?
+36:09
+So basically when you go back, you have almost nothing to do for for this part of the of the the network.
+36:16
+And given that you have one matrix one weight, that weight, one for the X and one for the H,
+36:25
+basically what will happen is that this matrix this weights will be updated to capture the information that is encoded in the later stages.
+36:33
+Right, because there's more information, but it will not actually do anything about the previous the first initial stage.
+36:41
+Right. Steps towards that. Okay. And so that's that's a big problem in RNNs 
+36:49
+So it might be that it has to be the capacity and.
+36:57
+More information. More information.
+37:05
+Below is the original. Yes, if you include your people.
+37:09
+But in the ring, you think that's because the.
+37:17
+It didn't go as much as you want.
+37:22
+Yes, but then you're going to lose everything in the bus.
+37:26
+But there was no reason for me to leave the.
+37:32
+Lost. But this transformations are learned, right?
+37:39
+These W's you learned them, and you learn them based on the loss, which depends on the x from here as well as the x from over there.
+37:43
+And because you have a loss which actually will be the accumulation of all the steps,
+37:54
+because at this stage here, this loss will be snmaller than basically you're going to lose information.
+38:01
+on updating, when updating you are going to loss information for the first.
+38:08
+Part of the whole sequence. Well, this is. How do you think can be transmitted earning signal?
+38:17
+Through the network. Mm hmm. And the deeper the network is, the harder it is to transmit.
+38:27
+Transmit a meaningful learning signal to change that gradients further.
+38:34
+Yes, I think that's what I think about. Yeah, it's a symbol of.
+38:41
+Exactly. Yeah. Yeah. So of all, what is the square in the square?
+38:47
+The square is the unit. Let's say this is the H, right?
+38:57
+That's what what you have inside, which actually is starts from zero.
+39:00
+And then it captures the information from the first word and then captures the infomation from the first and second and so on.
+39:05
+So it's. Seems like weeks.
+39:12
+Mm hmm. Depending on the relevance of his inputs or over learning.
+39:17
+Go. Okay. The inputs from the best, wherever they may be.
+39:24
+Thank you then. How occupy a big space in the cities, I think.
+39:29
+So if you use Lightspeed big. Mm hmm.
+39:37
+Then even if you go home, it's 200 words.
+39:41
+A future that. No. Because.
+39:48
+It's still legal, but those still didn't go into it well.
+39:53
+it will but it will have a very little, very small portion, because every time you do, as you said, you have a very you have a limited H.
+40:01
+Right. And this H changes based on whatever you give as input.
+40:08
+So every time it's something new and the idea is it captures the information, from before, the information from now and so on and so on.
+40:13
+So and if you have O in the beginning or I in the beginning, and then you have 200 other words or 199,
+40:19
+other words, basically the information at ht eend will have the most impact.
+40:26
+It will have much more impact than the first one. Okay.
+40:31
+Um, so basically because of that, we have to still time that 2 minutes.
+40:35
+People have come up with the idea of Gates where you use something to say, okay, keep this information or don't keep this information right now.
+40:43
+It sounds kind of okay here.
+40:56
+But when you're basically just giving this obviously tw guys who credit and Schmidt said, oh, right.
+41:00
+In this printing of money. Oh yeah.
+41:09
+There is a starting with with its. But this year I want to gandel say you shall not pass but thats another thing.
+41:14
+So these guys came up in 1997. Let's just think about the year.
+41:27
+That's 1997, right? What is it, 20 years before actually neural networks make it through.
+41:33
+Made it through. So these guys came up with this idea of the gated units.
+41:41
+And what these units will do is would allow or disallow certain proportion of the input to be retained at the input and the hidden state.
+41:48
+Okay. So here I am showing you the LSTM architecture long short term memory unit, which basically has three gates that sigmoids are the gates.
+41:59
+So this is sigmoid activation and it has a tanh over there for scaling.
+42:13
+And it has also another part over there, which is called the cell state.
+42:22
+Okay. So I think that if I try to rush this the explanation before the break, it would be too much.
+42:27
+But so I'll leave it for after the break. But before before that, can you tell me.
+42:36
+Yes. What is the range of a sigmoid function? What's the range of the output of a sigmoid function?
+42:42
+But he said, what is the output of? What is the range of the output of the sigmoid function, which is zero to one?
+42:50
+What is the output of the tanh function or hyperbolic tangent function.
+43:01
+Yep. Minus one to one Okay. Okay.
+43:10
+So let's break here and then we'll continue afterwards.
+43:13
+But how do you always see the model on slow?
+43:21
+Just a second.
+43:25

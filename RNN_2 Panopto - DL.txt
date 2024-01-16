@@ -1,0 +1,690 @@
+Let's. Let's start again. Let's start again with the second part of the class.
+0:01
+No dropping in class place. He has a broken arm. Just this job.
+0:07
+Sorry. Yeah, I. Hold it. You are. You're getting better.
+0:11
+Yeah, I did my best bike accident. Well, I stepped it sideways, and it just like it looks like I'm.
+0:16
+You know. Yeah, well, that's then, I guess. Been there.
+0:25
+Done that. Hope you have a quick recovery.
+0:29
+Uh, yeah. Okay. Let's talk about electives.
+0:34
+Okay. So, look, what we talked about earlier was gates or mechanisms to allow certain things to pass, similar things not to pass.
+0:39
+We said that we are having a with activation function and tangles after which function.
+0:50
+Each of them have two roles. So Sigmund has one role.
+0:58
+He witnesses another role. And the first one to sing with is basically the role of the gate, because it's between zero and one.
+1:02
+Thus if you have something that is zero or closer to zero information, it's not allowed to pass or commission is not a thing.
+1:10
+If you have something closer to one, then from actually right and then with a timeless function,
+1:18
+basically we want to scale things into the minus one one where you say,
+1:24
+okay, I want to retain this information or I want to forget the commercial, but then kind of the negative portals.
+1:28
+Okay. So that's where these two activation functions come in play and that's how understand looks like.
+1:35
+Basically, you can imagine with a lot of neurosis. I think a lot of this is the simpler graph where you take the current input here.
+1:43
+Okay, that's second.
+1:55
+Um, okay, so you take the first. So there's the forget the gate basically to tell you how much information to remember
+2:04
+or to forget how much information from the previous from the previous iteration.
+2:14
+And you have the cell state which gets this information that's C up there.
+2:21
+And basically when you come here in this gate, you take the current input,
+2:25
+you take the previous given state and you take the cell state and you say, okay, what proportion do we want to keep right with this signal?
+2:32
+Simulate with activation. Basically, we want to keep more information. Do we want to keep less information on the previous step?
+2:43
+And basically, if you have something which is closer to zero, just imagine it's just one number, not matters system, just one number.
+2:50
+If it's something that just goes off zero when multiplied with the previous or the past, information does remember information of the memory.
+2:59
+That's the kind of the long term memory.
+3:08
+Then when you multiply this zero or one or something that's close to zero sum equals one, then basically you indicate how much information you want.
+3:12
+Put it there. Closer to zero is no information.
+3:21
+Closer to one is more like the whole. Okay, so in this way, again, all these blue and green boxes, they are liveable parameters,
+3:25
+which means that through the training of the network, it would be to learn what to remember or what to forget.
+3:35
+Okay. All right. So only the first. The first getting the forget.
+3:41
+Okay. You actually have this operation which will tell you how much to remember, how much to forget based on the input and the previous hidden state.
+3:45
+And to give you this kind of the cell state, which is this, let's say, the memory of the method,
+3:54
+then in the the second in the second gate over there, that's the input gate.
+4:01
+Basically what happens is that you say, okay, how much of the input I want to to or how much input I needs to impact the memory and basically say,
+4:09
+first of all, scale my input between zero and minus one and one.
+4:23
+Okay, so that we have normalised inputs.
+4:28
+And again, this is based on this two parameters on the current input as the previous output of the previous states.
+4:31
+So scale them between minus one and one in the sense of, okay, let's see how much do we want to keep?
+4:41
+How much we what do we want to do to to keep the same information?
+4:48
+Or do we want to to take the opposite information to forget some things and then basically in the C one and
+4:53
+to see what we're going to to actually find the proportion of this information that we want to to keep that.
+5:00
+Then you multiply them up there, right?
+5:10
+So you're multiplying this to indicate how much of this new knowledge that you have indicated with the minus one you want to actually get.
+5:12
+So multiply and some of them so you add them to the to the memory.
+5:20
+Okay. So if you think about this first do what you have is let's see how much memory I want to retain from before.
+5:25
+Let's see how much I want to actually get, how much new information I want to add to the memory.
+5:34
+Right. And then at the end you all to this is your cell state.
+5:40
+And then you also want to output a new hidden state, which is again about how much information you want to actually input.
+5:46
+The next decision point it the output the output gate.
+5:58
+Okay. Is this clearer? Like more or less?
+6:09
+No. So through the whole step, you actually think about the C of the state as your member of the net and you want to say how much?
+6:12
+You want to retain from the input from the previous and from the previous moment in the first in this will get you actually not reduce this
+6:26
+memory all because so so you reduce this memory and you say okay I want to retain the whole or part or non at all from this previous memory.
+6:38
+And then in the second, you actually want to see how much of the new inputs that the have.
+6:50
+I want to add to this memory. Okay. Now, this can be it's not necessarily is a proportional that you can reduce with 50% that then, you know it's 50%.
+6:55
+Right. This method says that this kind of stuff together.
+7:04
+Do you actually have something meaningful based on the.
+7:09
+I see back propagation, all the learning process, and then at the end you want to, to output certain proportion of that information.
+7:14
+Right. All right.
+7:28
+I know it's a bit messy, but I know you can read it.
+7:33
+And actually in the books like all the.
+7:39
+Of the action on this slide, there is an explanation about the gates.
+7:46
+Each gate does what? It's not. It's in the notes.
+7:52
+So when you open the slides, you can actually read them more carefully.
+7:56
+But just think about the fact that we want to keep and not keep certain information.
+7:59
+Why do we want to do that? Actually. Because we want to reduce the.
+8:05
+Of mitigating the problem with the punishment target so that we actually keep.
+8:10
+If you remember this first is because here it.
+8:15
+This one. Basically what we want to change these distributions so that we don't have every time how in the, the, uh,
+8:22
+the previous information let's have a different distribution which will give more weight on some previous states.
+8:31
+The previous inputs. Right. And less we would have on the next list.
+8:41
+Right. So that's the whole idea that we don't have like disproportionate impact of these different inputs, but we have a more balanced distribution.
+8:46
+Any questions? But it's not a this.
+9:04
+Let's see. Yeah, it's just imitation here.
+9:16
+Don't worry about it, because basically it is the scale, the scale input, and you just see it.
+9:23
+So the combination of the input and the previous scale state in a scale between minus one and one.
+9:31
+So it's just a notation to, to say, okay, we take this one and that plus this one, and then that's what happens.
+9:38
+But the idea is that you have the scale in between minus one and.
+9:44
+If you see other other diagrams representing the steam units, you may not see the C part.
+9:52
+Yeah. Okay. So these are the the formulas.
+9:59
+Yeah. What does what do they say?
+10:09
+Well, no, no, no. So. What is WEF?
+10:15
+I was like this one.
+10:20
+Yes. The hidden the hidden, hidden messages.
+10:29
+And it will live with it. Okay. So WS and use are sustainable, right?
+10:34
+So that's what it says. And what it has to do is that you have actually neural networks within the neural network.
+10:43
+Right. All these are different components of different neurones that are linked together.
+10:49
+And so you have trainable parameters for the forget gate and you have for both the the input and the state.
+10:55
+You have one also for the input gate, which is the w i and you are you have for this C bar and you have for the O and so on and so on.
+11:05
+So all these things are available.
+11:15
+So your neural network, your units of LSD, of LSD, it is actually a combination of different neurones and different subnets.
+11:18
+Let's say that all these they have this kind of thing,
+11:27
+which means that when you do all these computations because your date all values so that the information is learned in these neurones.
+11:31
+Now that's actually the beauty of elysium's that you don't need a lot.
+11:39
+You need just to define one unit. LSD, M or ottoman, basically.
+11:46
+And, uh, kind of. That's it. You can use a shallow neural network, a shallow Elysium, to encode language quite nicely.
+11:51
+I mean, it will not be the best model, but still, with one or two less, you can actually do magic.
+12:01
+So. And then that's because you have all this complexity that it's like, okay.
+12:09
+The question here is this light is not for you to remember this one.
+12:21
+It's okay. It's not about that. It's about the presenting.
+12:24
+Actually, this story here where you have these gates, his gates and these gates and this transformation right now, this is sophisticated assembly.
+12:27
+It relates to the previous idea.
+12:39
+It's the system that these two universities. Because we see these two features.
+12:43
+These features. It really is, because it seems that we micromanage the system with all this more towards the toaster, and that goes against the apron.
+12:49
+Who's there? Yeah, over there. You're calling us the boss? Heuristics, right?
+13:01
+We need to actually stick to our methods to make them learn something better, right?
+13:05
+Well, it's not a heuristic,
+13:10
+but it's another way of representing kind of the combinations of the information that goes in the neural network and how this information is combined,
+13:12
+which ideally is more optimal than just having a simple automate because of the fact that you have something that is proportional.
+13:20
+Meet the inputs and the previous information.
+13:28
+So it's a it's a way of yeah, I was smart and I did that.
+13:33
+I don't know why that was, but it was so. And if you look at the next thing, that is the particular thing which gets calculated.
+13:38
+I think that's from 2013, 2000 population.
+13:47
+So basically there is no safe state there. So there is no information that is obtained.
+13:53
+The long the memory was everything except just within the human state.
+13:58
+And basically you have a the subject and update guide and that's it.
+14:04
+And the same guy to just kind of tell you again how much information you want to, to, to lose, to forget.
+14:09
+And the update is how you actually update this. Well, the he the state based on the privacy information index the.
+14:17
+So that's the set gate here, which is actually against saying what proportion from H and X you want to retain.
+14:29
+Multiply that and then you have the gate here which tells you how much information you want to keep because you set it again here.
+14:38
+Now here we have an H, but the just the multiplication, the x is just a modification.
+14:47
+So it feels like all is a it's a is the problem.
+14:54
+The point was right.
+15:02
+Okay. And so at the end, what you have is you.
+15:08
+That was altogether. But the two work in a similar way.
+15:16
+They have similar performances. This one, the group get it has less Prometheus, as you can see.
+15:22
+You have one, two, three. State, one, one, two, one, two, three, four.
+15:30
+So this is. This is sustainable.
+15:40
+Okay. So. We train them for six months.
+15:46
+The rest are basically mathematical predictions.
+15:53
+Right. Well, the other one, the lithium, has many more of the normal parameters.
+15:58
+So basically, from a complex perspective, Jianyu is preferable because you have less hypothermic sort of less parameters.
+16:05
+That's a lot of metres to to deal with.
+16:16
+Um, somehow though, although both of them they showed similar performance in language modelling and esteems the performance.
+16:19
+So you can use either of them when you train your own neural machines.
+16:28
+The station system if you want. But. They are actually somehow the dominant of the four.
+16:33
+Okay. And so another thing that the police you mentioned is sorry.
+16:43
+Do you guys have any questions about the gates, the gate that you.
+16:49
+The whole point of the EU and then it's the ability to do that is to decide on how much of the growth rate and to retain each step of the of.
+16:54
+How much information from the previous steps to build think that this really is.
+17:14
+It's so scary. Depending on.
+17:21
+The whole point of this is to avoid the problem of losing.
+17:26
+Yes. Losing the kids. Yeah.
+17:32
+You can't do that by. Providing for the release of down the line some portion of the raw information that destroyed it before the previous.
+17:37
+You add new layers that will actually learn how much to keep or to put on.
+17:53
+So that's how much we're going to keep is the learning parameter. Yes, exactly.
+18:01
+Yeah. So basically, if I was to somebody else to make sure that we have actually a limited H, right.
+18:06
+Limited internal storage and we want to squeeze in all the information there.
+18:14
+What we can do is either expand this right. Which we don't want to,
+18:20
+because that's what we want to abstract away and then keep a very small representation of this information
+18:24
+or create a different distribution within this information or the knowledge that we want to get.
+18:31
+Like when you talk about sequences that we want to talk about words or timestamps or I know prices and etc., which depend on a lot of other stuff.
+18:36
+So we want to keep the important or. Increases of distribution over important and enthusiastic business over the less important parts.
+18:45
+Okay. All right.
+18:55
+So when you train your when you build your neural networks recruiting new recruits, you don't do them with a simple utterance.
+18:58
+You usually do them with still some juice in the Jupyter Notebook, which I don't think we'll have the time to actually look into today.
+19:07
+But in the Jovian notebook, you have actually a comparison of the three things there of the J2, Elysium and Almonds.
+19:19
+You can see the different accuracies, different performances.
+19:28
+You can actually play with the the length and see how actually the length impacts the performance
+19:30
+because that's what determines what or what impacts the inability to do to perform well.
+19:37
+Okay, so bidirectional evidence are Ottomans that what it actually go both ways, right?
+19:46
+Think about having a sentence that you want to translate.
+20:00
+You have title to a sentence and you can proceed from the left to right, the right to the left.
+20:02
+Think about languages like Arabic.
+20:07
+Where are they in Farsi? What are the guys from below? You know, from from right to left.
+20:11
+And if you start processing it left or right, basically you focus on the stuff on the back of the sentence.
+20:18
+So you actually want to start from the front,
+20:25
+but also think about the fact that we want to catch all the information equally and thus starting from starting from the back,
+20:27
+regardless of which language you think will kind of equalise the distribution and learn.
+20:35
+Also the first, the front part as well as the back part kind of equally well.
+20:41
+And that's the idea of bi directional ordinance that you kind of move over both sides.
+20:47
+And you learn. Well, but in a sense, how to this is how to encounter these things on both sides.
+20:56
+Okay. Who can tell me now in what situations we are in this or by direction of this would not work.
+21:05
+Not to do this. Sorry. Justice. I think the microphone.
+21:13
+In all situations. In all situations, the thing that is most of you are not that basic.
+21:28
+Even levels of information. In the.
+21:40
+So I. And motor vehicle theft was in the hands of the police.
+21:48
+So let's say that like it's not like this information from the past, but then it becomes less of it stuff, you know,
+22:07
+maybe using different parts of the past have different levels of relevance and somehow the model or this,
+22:21
+you know, and okay, so for example, we want to open up a few other people who not give me information from the iPhone or who because it's different,
+22:30
+because it is a duplication process.
+22:50
+Yes. You know, so you have situations where you don't have information about essentially developing your business,
+22:53
+institutional client or stock market as well. Yeah.
+23:02
+Yeah. That goes on in the example where you don't have actually the end of the sequence of the building and
+23:06
+you can learn how to do anything with that and you can have all the information within the ecosystem,
+23:14
+basically. So what you do is you can't just go on both sides because you don't have the skills.
+23:22
+What about language synthesis?
+23:29
+You can also say also from left to right, the right left.
+23:33
+But when you talk about. Real time speech for your phone those days, and then you have to go for that.
+23:38
+So that was that was on his own. That's another example.
+23:49
+In the photos, but also visual on these photos.
+24:06
+Lewis reminded you you're the one who put in government intervention.
+24:13
+Yeah, it's instructive. This conference is going to look like this was in Brazil.
+24:21
+But I think this is really interesting in those conditions. Cause it's like she's got a group of students.
+24:30
+So is so so this is like the way you the answer was at the end of the book in which you preprocessing
+24:38
+from this thread and making of all the parts of speech the c the goal is for the speech.
+24:49
+What does the point of what the opposite of before?
+24:54
+You need to get to the end of the sentence in the context of the neural network that starts from the beginning.
+24:59
+I see how the Federation increases efficiency since the previous years.
+25:10
+It was at the end of the book. It doesn't go all the way through.
+25:18
+And then change. That was scenes before your presentation.
+25:23
+You can go both ways, even though it's one of both action oriented so that you can actually kind of think gold long,
+25:27
+long distance relations in a long distance relationship in a sequence.
+25:39
+Right. Okay. So that's sort of the variance.
+25:44
+Now let's talk a bit about language processing, what one hoped encoding.
+25:51
+We talked about one for concluding. When we first talked about serious.
+25:58
+Right. And there we had this a IMDB data set with reviews and where we wanted to do wonderful thing called advice.
+26:03
+Now there I actually started doing about one foot encoding and then we ended up in a different role from what it was in the normal.
+26:11
+Because usually when we do language what we have is.
+26:20
+So it just took me. So what we have there is vocabularies of words.
+26:26
+All right. But what we give as inputs to the neural network is numbers, mitosis, arrays of inputs of numbers.
+26:34
+Now, what we have usually is like an array, which is syntax, like zero one, two, three until 450,000 another or what.
+26:42
+Right. So, so we have usually around hundreds of thousands of words that are in your dictionary.
+26:52
+Or even if it is 10,000. Right. And then you can imagine that if you give its inputs, this equals 012.
+26:59
+And this goes through the network without being or without it being normalised.
+27:07
+Then you you're going to have a very small impact versus if you give something that is 2000, 10,001 thousand.
+27:12
+Right. Which has much higher difficulty because you multiply things.
+27:20
+There's something in the.
+27:24
+If you have zero one and two, if you multiply them with X, you have zero x plus 0x2 plus 1x2 plus 2x3, which will be one number.
+27:28
+And if you have 10,000, 10,000, 1002, it will be another number which is much more much bigger than the original,
+27:43
+the first that's in the same squared jurisdiction square.
+27:53
+Yes. No, that sounds like a random number or it's not normal thing because randomness can come in different ways,
+27:58
+but it's a random number, which is between zero and then some other. Okay.
+28:06
+Yes, exactly. They have different magnitudes and thus the impact on the network in this than the learning will be different.
+28:11
+So what we do is we want to normalise distance.
+28:17
+So basically we want to put them in a equal distance vectors so that the network will learn this as starting from the same point.
+28:19
+Right. So there is no difference in the way that words are represented by.
+28:30
+So here we have from Paris, Italy, France.
+28:35
+And as you can see here, what we do is for every entry in the vocabulary,
+28:39
+we create an array with the length of this array, this, this being the length of the vocabulary.
+28:44
+If we have done work, be if we have 15, what were 15?
+28:52
+If you have 10,000 where we have zeros everywhere except for the index, which corresponds to the index of this word in the picture.
+28:56
+So if we have the zeroth first word wrong, then you have one in the in this three on the index zero and everything else is zero.
+29:05
+Right. If we have Paris here, we have 0440 element one for the first element which corresponds to that.
+29:20
+So the idea is that each of this kind of represents one word.
+29:28
+Then you say is this would this work? So zero is the second element is for the sake of the first one is for funds for Italy, France and so on.
+29:33
+And then this one is well, this is France.
+29:44
+All right. Now, these are the inputs that we can actually give to the new items.
+29:47
+So these are arrays. And each arrays has, again, the size, the length being the local cabinet.
+29:52
+So, again, once it was. Okay. Forwards.
+30:00
+Mm hmm. For once, this area. No.
+30:04
+If you have one sentence of four words and this four words come from a vocabulary which has five words,
+30:09
+then this sentence represented with four by five.
+30:16
+So it was like mini or something. Yeah.
+30:22
+Um, so and that does a first thing.
+30:26
+Right. But what happens is that if you have 100,000 words in your vocabulary, basically you're going to have.
+30:30
+An array that has a length of 100 for every 100,000 for every word that is distributed, which means that they're super weak and super scarce,
+30:39
+sparse, because you actually don't have a lot of information there except for one one somewhere and all the rest is zero.
+30:49
+So that's why you can learn different representations using what's called what embeddings.
+30:56
+So basically, if we pass all this one whole encoding things, or even if they call it, they're just randomly encoded.
+31:02
+If you pass through a neural network and you try to learn these representations you can come up with.
+31:10
+Much more. Much more on this.
+31:17
+Writers that represent these words and that you don't have only 112072.
+31:21
+You have. Arbitrary number of arbitrary numbers, which actually are indicative for every different one.
+31:28
+And not only that usually words that that when you when you do whatever, it's usually words that are actually closer together in meaning.
+31:36
+They're also marked in the vectors or in into presentations that then also with a small distance cosine similarity,
+31:46
+for example, or Manhattan distance or whatever you want to interpret it.
+31:53
+And the most famous example. Yeah, so that's the, the comparison between the two.
+31:58
+So these are one quote encoding what, what recordings you where you have like symbols being black fields and the one is a present with a white there.
+32:04
+And then you have the water banks which are this which are lower dimensional.
+32:16
+And I learned from your take from from the book that they because they can be so that there's a thing that
+32:20
+you can actually learn embeddings from your data or you can use some evidence that to look from of this.
+32:29
+Uh. I want to skip this one and I want to go through the worst of it, and then I'll go back to the phone.
+32:36
+So basically, have you hit the quarterback who has sort of what like and I see hence.
+32:44
+But it was. Okay. Then who would like to tell me about what to back?
+32:53
+Anyone is. Yeah, exactly.
+33:10
+That's what anyone wants to I mean, when you have quote unquote.
+33:19
+Yes. So as far as I remember, there was a target for and all of the ones from previous British forces that are related to the subject, what it's like.
+33:34
+Then you can come home.
+33:51
+You can walk. So basically, if you see the software that is left in the world and then you have the smiley reading list, you know, it's.
+33:57
+Which basically is fine. And then substitute one, one, one.
+34:13
+Then you go through to the right and the left and you try to this and what exactly is what would you like to have to learn?
+34:17
+So you a lot of connections and that is what they thought.
+34:30
+You can say, okay, I went to the train line.
+34:38
+Let me look the size 64 instead of 10,000 and.
+34:42
+And your work. The presentations will be that much. 64.
+34:51
+That's it. And this 64 should allow you to capture all the information about all the.
+34:56
+What is it you have in your cover? What other worth embedding?
+35:00
+More those have you heard of? The Gulf.
+35:05
+I'll give you a hint. Sesame Street. Yeah.
+35:14
+Another thing they stood for this year was the hero murder.
+35:18
+Anyone? Have you heard of Elmo? Yes. Yes, you do?
+35:24
+Yeah. Uh, yeah. Well, Bert bought all this language models that are trained in a similar way, like, for.
+35:29
+For you have, like, the sentence and some of, like, I think 15% or 25% of the women accepted the proportion of this.
+35:39
+Of the words in this sentence are must. And the task is actually this must words.
+35:47
+So what happens is that you learn these representations of the other words
+35:52
+that that in your sentence that you can use then to do whatever else you want.
+35:55
+And because they're trained them massive amounts of data, you actually can use them for mass for most tasks.
+36:00
+Right now, do you have any questions?
+36:06
+And before we wrap up, I just will go over. That's not just different types of hats that you can do, one to many, many to one where you have either.
+36:09
+A sequence of things like. Many.
+36:25
+One better to have a sequence of elements is input, and you ought to do some sort of a classification, for example.
+36:30
+Right. Or you even want to when you're given something, let's say.
+36:37
+An image that you don't the gold or just a seat, and then you want to generate some sequence to see.
+36:44
+Okay. If you want to generate the 15th sentence in some book, you give the number 50, for example, and then you generate ideally this sentence.
+36:52
+And the most interesting one, of course, is where you have the sequence, the sequence model,
+37:03
+which will input things and it will create actually another hidden representation here,
+37:09
+which is oak, which is just one entity which represents or captures the information of the whole sentence or the whole sequence.
+37:17
+And then this is given into one too many. The goals are to exaggerate the outputs of the sentence or the output sequence.
+37:24
+And that's the the ideal neural machine for the station.
+37:31
+When it started, before the Transformers, we had like the sequence of things that are encoded when you have a hidden representation of this sentence,
+37:34
+which is this multi dimensional state here, and then basically you generate the ultimate.
+37:44
+Okay. And the last thing you'll excuse me for two more minutes is the.
+37:54
+Okay. Next week, you're going to talk with Sebastian about transform.
+38:01
+What? Annotation, thesaurus based notation.
+38:05
+But I just want to mention briefly, it's not in the context of CNS, but basically when you have something like this.
+38:08
+What happens is that whether you have an L stem, a bidirectional stem or by the actual injury or whatever there is.
+38:20
+A system compression and loss of information.
+38:29
+The loss of information comes from the fact that you actually just take one single entity that should ideally represent your whole
+38:33
+sentence or whole sequence that you have input and conditionally on that you'd want to generate your outputs equals outputs,
+38:40
+which means that, okay, I'm going to generate something based on something that I have seen,
+38:49
+like one, one representation which may not be complete or enough to represent a meaningful sentence.
+38:53
+Meanwhile, so what we can do actually, is to try to align things like this state here.
+39:01
+To try to align with this one here and this one with this one.
+39:10
+This one with perhaps this one. I think if it is French, what is the English language where things have changed around?
+39:14
+It's all the attention mechanism or take when when some generating thing or do the training step, it will take this cluster.
+39:22
+There is another layer here which will actually be, let's say, just the model that will compute.
+39:30
+What is the proportion or the distribution of of over this?
+39:37
+The states here, when you want this, you can start here.
+39:43
+So it will try to map or align this one here with one of the models and then also have one is then go to the second one and we the same and certain
+39:47
+you're going to do so you're going to build this matrix of and by m here the states which will actually map like the one to the other or it it's,
+40:00
+it's actually not a 1 to 1 mapping but it's like a more flexible and obviously.
+40:13
+Not too deterministic modifications. So that's what the station does.
+40:22
+Why do we need attention? Because similar to the idea of elysium's,
+40:26
+we want to pay attention or to actually focus on certain parts of your sentence or your sequence that are more important.
+40:30
+And when you learn these things here, this attention mechanism that counts is a layer between these parts.
+40:37
+You basically you learn which are the more important parts.
+40:43
+Okay. Now, I'll kind of wrap up here.
+40:48
+I started talking about this project with eBay, and there was a reason because actually at this project with eBay,
+40:53
+what we did to analyse our data is to actually look at the attention because it is as if we try to align products.
+40:59
+And what was interesting today is to see that when you talk about cameras, for example,
+41:06
+we focussed really on the on the front of the camera rather than on the other things because it wants to know whether it is its ideal,
+41:10
+whether it is something for something or for or for camera.
+41:19
+Right. Because at the end of the day, you can have a case for for yourself or a case for your iPhone.
+41:22
+But what makes the difference is these brands that have that right and so that are really focussed on all these brand names in our state.
+41:33
+So that was actually very interesting.
+41:41
+But yeah, attention is an intermediate step where you learn intermediate kind of alignment between excludes the hero states,
+41:44
+the one people in the decoder which are used then later in your for reference to actually focus on specific parts of your sense of existence.
+41:52
+So I'll finish here. You have to talk about last week about the attention and the Xanax and the multimodal systems.
+42:01
+And next week, you're going to hear more from this one, which is solely based on attention,
+42:10
+selfie photos and some other tricks there that makes it so that everybody's using the.
+42:17
+Right. Any questions? Yes. Yes, I'm asking.
+42:28
+Okay. All right. Let's see who's here.
+42:33
